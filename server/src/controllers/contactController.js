@@ -1,40 +1,18 @@
 import ContactMessage from "../models/ContactMessage.js";
 import { sendContactNotification } from "../services/mailer.js";
-
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { contactSchema, firstValidationError } from "../utils/validation.js";
 
 export async function createContactMessage(req, res, next) {
   try {
-    const fields = ["name", "email", "subject", "message"];
-    const payload = Object.fromEntries(
-      fields.map((field) => [field, String(req.body[field] || "").trim()]),
-    );
-
-    if (fields.some((field) => !payload[field])) {
+    const result = contactSchema.safeParse(req.body);
+    if (!result.success) {
       return res.status(400).json({
         success: false,
-        message: "Name, email, subject, and message are required.",
+        message: firstValidationError(result.error),
       });
     }
 
-    if (!emailPattern.test(payload.email)) {
-      return res.status(400).json({ success: false, message: "Enter a valid email address." });
-    }
-
-    if (
-      payload.name.length > 80 ||
-      payload.email.length > 120 ||
-      payload.subject.length > 120 ||
-      payload.message.length < 10 ||
-      payload.message.length > 3000
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Please check the field lengths and try again.",
-      });
-    }
-
-    const contact = await ContactMessage.create(payload);
+    const contact = await ContactMessage.create(result.data);
 
     try {
       await sendContactNotification(contact);

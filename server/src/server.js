@@ -1,13 +1,15 @@
 import "dotenv/config";
+import mongoose from "mongoose";
 import app from "./app.js";
 import { connectDatabase } from "./config/db.js";
 
 const port = Number(process.env.PORT || 5001);
+let server;
 
 async function start() {
   try {
     await connectDatabase();
-    const server = app.listen(port, () => {
+    server = app.listen(port, () => {
       console.log(`API running on http://localhost:${port}`);
     });
 
@@ -28,3 +30,15 @@ async function start() {
 }
 
 start();
+
+async function shutdown(signal) {
+  console.log(`${signal} received. Closing application.`);
+  if (server) {
+    await new Promise((resolve) => server.close(resolve));
+  }
+  await mongoose.connection.close();
+  process.exit(0);
+}
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));

@@ -1,81 +1,152 @@
 # Kanwar Devrath — Full-stack portfolio
 
-A responsive MERN portfolio with a premium dark interface, glassmorphism, Framer Motion animations, and a database-backed contact form.
+A production-oriented MERN portfolio with project case studies, GitHub activity, a database-backed contact workflow, and a protected message administration dashboard.
+
+## Features
+
+- Responsive light/dark SaaS-style interface with Framer Motion
+- Routed case studies for Job Tracker, Portfolio, and DSA Practice Lab
+- Contact form with MongoDB persistence, validation, email notification, and rate limiting
+- JWT-protected admin inbox with search, filters, pagination, statuses, deletion, and statistics
+- Cached GitHub repositories, languages, stars, commits, and 30-day activity
+- Dynamic SEO metadata, JSON-LD Person schema, sitemap, robots rules, and custom 404 page
+- Frontend and backend test suites with automated GitHub Actions quality checks
 
 ## Stack
 
-- React 19, Vite, Tailwind CSS 4, Framer Motion
-- Node.js, Express, MongoDB, Mongoose
-- Axios, Nodemailer, Lucide React
+- Frontend: React 19, Vite, React Router, Tailwind CSS 4, Framer Motion, Axios
+- Backend: Node.js, Express, MongoDB, Mongoose, Zod, JWT, bcrypt, Nodemailer
+- Testing: Vitest, React Testing Library, Supertest, mongodb-memory-server
 
-## Project structure
+## Structure
 
 ```text
 .
-├── portfolio/          # React + Vite frontend
+├── .github/workflows/ci.yml
+├── portfolio/
 │   ├── public/
 │   └── src/
-│       ├── components/portfolio/
-│       └── data/
-├── server/             # Express API
-│   └── src/
-│       ├── config/
-│       ├── controllers/
-│       ├── models/
-│       ├── routes/
-│       └── services/
-└── package.json        # Root development scripts
+│       ├── components/
+│       │   ├── admin/
+│       │   ├── portfolio/
+│       │   └── routing/
+│       ├── data/
+│       ├── hooks/
+│       ├── lib/
+│       ├── pages/
+│       └── test/
+├── server/
+│   ├── scripts/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   └── tests/
+└── scripts/check-secrets.sh
 ```
 
 ## Local setup
 
-Requirements: Node.js 20+, npm, and a local or hosted MongoDB database.
+Requirements: Node.js 20+, npm, and MongoDB.
 
-1. Install dependencies:
+```bash
+npm install
+npm run install:all
+cp portfolio/.env.example portfolio/.env
+cp server/.env.example server/.env
+```
 
-   ```bash
-   npm install
-   npm run install:all
-   ```
+Configure `MONGODB_URI`, `JWT_SECRET`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD_HASH` in `server/.env`.
 
-2. Create environment files:
+Generate an administrator password hash:
 
-   ```bash
-   cp portfolio/.env.example portfolio/.env
-   cp server/.env.example server/.env
-   ```
+```bash
+npm run hash-password --prefix server -- "a-long-private-password"
+```
 
-3. Set `MONGODB_URI` in `server/.env`. SMTP values are optional; messages are always saved to MongoDB, and email notifications are sent only when SMTP is configured.
+Copy the generated hash into `ADMIN_PASSWORD_HASH`. Do not store the plain password in any tracked file.
 
-4. Start frontend and backend:
+Start both applications:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
-The frontend runs at `http://localhost:5173` and the API at `http://localhost:5001`.
+- Frontend: `http://localhost:5173`
+- API: `http://localhost:5001`
+- Admin: `http://localhost:5173/admin/login`
+
+## Environment configuration
+
+Frontend:
+
+- `VITE_API_URL`: deployed API origin
+- `VITE_SITE_URL`: canonical public site origin
+
+Backend:
+
+- `MONGODB_URI`: MongoDB connection URI
+- `CLIENT_URL`: comma-separated allowed frontend origins
+- `JWT_SECRET`, `JWT_EXPIRES_IN`: admin session signing
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH`: administrator credentials
+- `GITHUB_USERNAME`, `GITHUB_TOKEN`: GitHub API access
+- `GITHUB_SELECTED_REPOS`: optional comma-separated repository names
+- `SMTP_*`, `MAIL_*`: optional contact email notifications
 
 ## API
 
-`POST /api/contact`
+Public:
 
-```json
-{
-  "name": "Ada Lovelace",
-  "email": "ada@example.com",
-  "subject": "Project enquiry",
-  "message": "I would like to discuss a new web product."
-}
+- `GET /api/health`
+- `POST /api/contact`
+- `GET /api/github/profile`
+
+Admin:
+
+- `POST /api/admin/login`
+- `GET /api/admin/messages`
+- `GET /api/admin/messages/stats`
+- `PATCH /api/admin/messages/:id/status`
+- `DELETE /api/admin/messages/:id`
+
+Protected requests require `Authorization: Bearer <token>`.
+
+Message query parameters:
+
+```text
+?search=project&status=new&page=1&limit=10
 ```
 
-All fields are required. The API validates lengths and email format, stores valid messages in MongoDB, rate-limits submissions, and returns JSON success/error responses.
+Supported statuses: `new`, `read`, `replied`, and `archived`.
 
-## Production
+## Quality checks
 
 ```bash
+npm run security:scan
 npm run lint
+npm test
 npm run build
-npm start
 ```
 
-Set `VITE_API_URL` to the deployed API origin and `CLIENT_URL` to the deployed frontend origin. Multiple allowed frontend origins can be provided as a comma-separated list.
+The CI workflow runs the same checks on pushes and pull requests.
+
+## Deployment notes
+
+- Configure SPA fallback routing. A Netlify `_redirects` file is included.
+- Set `VITE_SITE_URL` and update `portfolio/public/robots.txt` and `sitemap.xml` if the deployment domain differs from the GitHub Pages URL.
+- Never commit `.env`, API tokens, private keys, recovery codes, or service-account files.
+- Rotate any credential that has ever been committed, even after removing it from Git history.
+
+## Security history cleanup
+
+The repository previously tracked `portfolio/.env` and a GitHub recovery-code file. Both paths must be removed from all Git history and the rewritten `main` branch force-pushed:
+
+```bash
+git push --force-with-lease origin main
+```
+
+Anyone with an older clone should re-clone after the history rewrite. GitHub recovery codes exposed in a previous commit must be regenerated in GitHub account settings.

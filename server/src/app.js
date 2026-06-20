@@ -3,6 +3,8 @@ import express from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import contactRoutes from "./routes/contactRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import githubRoutes from "./routes/githubRoutes.js";
 
 const app = express();
 const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
@@ -29,6 +31,27 @@ app.use(
   }),
   contactRoutes,
 );
+app.use(
+  "/api/admin/login",
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: process.env.NODE_ENV === "test" ? 1000 : 10,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    message: { success: false, message: "Too many login attempts. Try again later." },
+  }),
+);
+app.use(
+  "/api/admin",
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: process.env.NODE_ENV === "test" ? 1000 : 100,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+  }),
+  adminRoutes,
+);
+app.use("/api/github", githubRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({ success: false, message: "Route not found." });

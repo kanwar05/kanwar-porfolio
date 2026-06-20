@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import { navLinks, profile } from "../../data/site";
 
 export default function Footer() {
@@ -17,9 +18,9 @@ export default function Footer() {
           </a>
           <div className="flex flex-wrap gap-x-6 gap-y-3">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-subtle text-xs hover:text-violet-500">
+              <Link key={link.href} to={`/${link.href}`} className="text-subtle text-xs hover:text-violet-500">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="flex gap-2">

@@ -8,11 +8,15 @@ const contactMessageSchema = new mongoose.Schema(
     message: { type: String, required: true, trim: true, minlength: 10, maxlength: 3000 },
     status: {
       type: String,
-      enum: ["new", "read", "replied"],
+      enum: ["new", "read", "replied", "archived"],
       default: "new",
+      index: true,
     },
   },
   { timestamps: true },
 );
+
+contactMessageSchema.index({ createdAt: -1 });
+contactMessageSchema.index({ name: "text", email: "text", subject: "text" });
 
 export default mongoose.model("ContactMessage", contactMessageSchema);

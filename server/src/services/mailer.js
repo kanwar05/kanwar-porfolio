@@ -20,11 +20,13 @@ export async function sendContactNotification(contact) {
   const transporter = getTransporter();
   if (!transporter) return;
 
+  const safeSubject = contact.subject.replace(/[\r\n]+/g, " ").slice(0, 120);
+
   await transporter.sendMail({
     from: process.env.MAIL_FROM || process.env.SMTP_USER,
     to: process.env.MAIL_TO || process.env.SMTP_USER,
     replyTo: contact.email,
-    subject: `Portfolio enquiry: ${contact.subject}`,
+    subject: `Portfolio enquiry: ${safeSubject}`,
     text: [
       `Name: ${contact.name}`,
       `Email: ${contact.email}`,

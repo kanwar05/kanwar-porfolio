@@ -7,7 +7,7 @@ export default function Experience() {
   return (
     <Section id="experience" className="section-tint">
       <div className="page-shell">
-        <span className="eyebrow">05 / Journey</span>
+        <span className="eyebrow">06 / Journey</span>
         <h2 className="section-title">Learning in public. Building with momentum.</h2>
         <div className="relative mt-10 max-w-4xl">
           <div className="absolute bottom-3 left-[7px] top-3 w-px bg-gradient-to-b from-violet-400 via-cyan-400/50 to-transparent" />

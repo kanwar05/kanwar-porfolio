@@ -32,6 +32,7 @@ export const navLinks = [
   { label: "Education", href: "#education" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "GitHub", href: "#github" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
@@ -95,28 +96,34 @@ export const floatingTech = [
 export const projects = [
   {
     title: "Developer Portfolio",
+    slug: "portfolio",
     type: "Full-stack experience",
     description:
       "A premium personal portfolio with animated storytelling, responsive layouts, and a database-backed contact workflow.",
     tags: ["React", "Framer Motion", "Express", "MongoDB"],
-    image: "/images/projects/project1.webp",
+    image: "/images/projects/portfolio-home.svg",
     github: "https://github.com/kanwar05",
+    liveDemo: "/",
     featured: true,
   },
   {
-    title: "MERN Product Platform",
+    title: "Job Tracker",
+    slug: "job-tracker",
     type: "In development",
     description:
-      "A scalable product platform exploring secure authentication, reusable APIs, stateful interfaces, and practical deployment patterns.",
+      "A focused MERN workspace for tracking applications, interviews, follow-ups, and outcomes with secure user-owned data.",
     tags: ["MERN", "REST API", "JWT", "Tailwind"],
+    image: "/images/projects/job-tracker-dashboard.svg",
     github: "https://github.com/kanwar05",
   },
   {
     title: "DSA Practice Lab",
+    slug: "dsa-lab",
     type: "Problem-solving",
     description:
       "A growing collection of data structure and algorithm solutions, written for clarity, complexity awareness, and repeatable learning.",
     tags: ["C++", "Algorithms", "Git", "Documentation"],
+    image: "/images/projects/dsa-lab.svg",
     github: "https://github.com/kanwar05",
   },
 ];

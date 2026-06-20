@@ -1,5 +1,6 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { projects } from "../../data/site";
 import Section from "./Section";
 
@@ -43,7 +44,7 @@ export default function Projects() {
                 {project.image && (
                   <img
                     src={project.image}
-                    alt=""
+                    alt={`${project.title} interface preview`}
                     className="h-full w-full object-cover opacity-70 transition duration-700 group-hover:scale-105 group-hover:opacity-90"
                   />
                 )}
@@ -58,7 +59,12 @@ export default function Projects() {
               <div className="p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-display text-lg font-bold">{project.title}</h3>
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className="font-display text-lg font-bold hover:text-violet-500"
+                    >
+                      {project.title}
+                    </Link>
                     <p className="text-muted mt-2 max-w-2xl text-sm leading-6">
                       {project.description}
                     </p>
@@ -80,6 +86,12 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
+                <Link
+                  to={`/projects/${project.slug}`}
+                  className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-violet-500"
+                >
+                  Read case study <ArrowUpRight size={14} />
+                </Link>
               </div>
             </motion.article>
           ))}

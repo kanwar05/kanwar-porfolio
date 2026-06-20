@@ -1,12 +1,11 @@
 import { useState } from "react";
-import axios from "axios";
 import { CheckCircle2, LoaderCircle, Mail, MapPin, Send, XCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "../../data/site";
 import Section from "./Section";
+import { api } from "../../lib/api";
 
 const initialForm = { name: "", email: "", subject: "", message: "" };
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -23,7 +22,7 @@ export default function Contact() {
     setToast(null);
 
     try {
-      const { data } = await axios.post(`${API_URL}/api/contact`, form);
+      const { data } = await api.post("/api/contact", form);
       setToast({ type: "success", message: data.message });
       setForm(initialForm);
     } catch (error) {
@@ -44,7 +43,7 @@ export default function Contact() {
           <div className="absolute -right-24 -top-24 size-80 rounded-full bg-violet-500/20 blur-3xl" />
           <div className="relative grid gap-9 lg:grid-cols-[.82fr_1.18fr]">
             <div>
-              <span className="eyebrow">06 / Contact</span>
+              <span className="eyebrow">07 / Contact</span>
               <h2 className="section-title">Have a good problem to solve?</h2>
               <p className="section-copy">
                 Tell me what you’re building, where you’re stuck, or what kind of
