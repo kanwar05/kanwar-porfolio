@@ -6,18 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "eslint src/App.jsx src/main.jsx src/components/portfolio src/data/site.js",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.18",
+    "axios": "^1.7.9",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.563.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-icons": "^5.5.0",
-    "react-scroll-to-top": "^3.1.0",
-    "react-simple-typewriter": "^5.0.1",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

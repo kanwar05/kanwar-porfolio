@@ -1,0 +1,15 @@
+{
+  "name": "kanwar-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix portfolio && npm install --prefix server",
+    "dev": "concurrently -n CLIENT,API -c magenta,cyan \"npm run dev --prefix portfolio\" \"npm run dev --prefix server\"",
+    "build": "npm run build --prefix portfolio",
+    "lint": "npm run lint --prefix portfolio",
+    "start": "npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
