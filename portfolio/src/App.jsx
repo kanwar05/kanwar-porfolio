@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/portfolio/Navbar";
 import Footer from "./components/portfolio/Footer";
 import HomePage from "./pages/HomePage";
-import ProjectCaseStudyPage from "./pages/ProjectCaseStudyPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -33,7 +32,6 @@ export default function App() {
         >
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/projects/:slug" element={<ProjectCaseStudyPage />} />
             <Route
               path="/admin/login"
               element={

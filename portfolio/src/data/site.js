@@ -93,41 +93,6 @@ export const floatingTech = [
   { label: "CLI", icon: TerminalSquare },
 ];
 
-export const projects = [
-  {
-    title: "Developer Portfolio",
-    slug: "portfolio",
-    type: "Full-stack experience",
-    description:
-      "A premium personal portfolio with animated storytelling, responsive layouts, and a database-backed contact workflow.",
-    tags: ["React", "Framer Motion", "Express", "MongoDB"],
-    image: "/images/projects/portfolio-home.svg",
-    github: "https://github.com/kanwar05",
-    liveDemo: "/",
-    featured: true,
-  },
-  {
-    title: "Job Tracker",
-    slug: "job-tracker",
-    type: "In development",
-    description:
-      "A focused MERN workspace for tracking applications, interviews, follow-ups, and outcomes with secure user-owned data.",
-    tags: ["MERN", "REST API", "JWT", "Tailwind"],
-    image: "/images/projects/job-tracker-dashboard.svg",
-    github: "https://github.com/kanwar05",
-  },
-  {
-    title: "DSA Practice Lab",
-    slug: "dsa-lab",
-    type: "Problem-solving",
-    description:
-      "A growing collection of data structure and algorithm solutions, written for clarity, complexity awareness, and repeatable learning.",
-    tags: ["C++", "Algorithms", "Git", "Documentation"],
-    image: "/images/projects/dsa-lab.svg",
-    github: "https://github.com/kanwar05",
-  },
-];
-
 export const timeline = [
   {
     period: "2025",

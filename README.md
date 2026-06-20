@@ -1,11 +1,11 @@
 # Kanwar Devrath — Full-stack portfolio
 
-A production-oriented MERN portfolio with project case studies, GitHub activity, a database-backed contact workflow, and a protected message administration dashboard.
+A production-oriented MERN portfolio with a live GitHub project gallery, GitHub activity, a database-backed contact workflow, and a protected message administration dashboard.
 
 ## Features
 
 - Responsive light/dark SaaS-style interface with Framer Motion
-- Routed case studies for Job Tracker, Portfolio, and DSA Practice Lab
+- Automatically synchronized public GitHub repository gallery with custom project artwork
 - Contact form with MongoDB persistence, validation, email notification, and rate limiting
 - JWT-protected admin inbox with search, filters, pagination, statuses, deletion, and statistics
 - Cached GitHub repositories, languages, stars, commits, and 30-day activity

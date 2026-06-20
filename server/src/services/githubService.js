@@ -103,6 +103,24 @@ export async function getGitHubProfile() {
       language: repo.language,
       updatedAt: repo.updated_at,
     })),
+    projects: repos
+      .filter((repo) => !repo.archived)
+      .map((repo) => ({
+        id: repo.id,
+        name: repo.name,
+        fullName: repo.full_name,
+        description: repo.description,
+        url: repo.html_url,
+        homepage: repo.homepage || null,
+        stars: repo.stargazers_count,
+        forks: repo.forks_count,
+        language: repo.language,
+        topics: repo.topics || [],
+        isFork: repo.fork,
+        createdAt: repo.created_at,
+        updatedAt: repo.updated_at,
+      }))
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)),
     languages: languageBreakdown,
     totalStars: repos.reduce((sum, repo) => sum + repo.stargazers_count, 0),
     recentCommits,
