@@ -1,13 +1,35 @@
 import {
+  Binary,
   Braces,
+  Bug,
   CloudCog,
   Code2,
   Database,
   GitBranch,
+  KeyRound,
   LayoutTemplate,
+  MonitorSmartphone,
+  Network,
+  Puzzle,
   ServerCog,
+  ShieldCheck,
+  Sparkles,
   TerminalSquare,
 } from "lucide-react";
+import {
+  SiCplusplus,
+  SiExpress,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiMongoose,
+  SiNodedotjs,
+  SiPostman,
+  SiReact,
+  SiTailwindcss,
+} from "react-icons/si";
 
 export const profile = {
   name: "Kanwar Devrath",
@@ -66,22 +88,46 @@ export const skillGroups = [
   {
     title: "Frontend",
     icon: LayoutTemplate,
-    skills: ["React", "JavaScript", "Tailwind CSS", "HTML5", "Responsive UI"],
+    skills: [
+      { label: "React", icon: SiReact, color: "#61dafb" },
+      { label: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+      { label: "Tailwind CSS", icon: SiTailwindcss, color: "#38bdf8" },
+      { label: "HTML5", icon: SiHtml5, color: "#e34f26" },
+      { label: "Responsive UI", icon: MonitorSmartphone, color: "#a78bfa" },
+    ],
   },
   {
     title: "Backend",
     icon: ServerCog,
-    skills: ["Node.js", "Express", "REST APIs", "Authentication", "Validation"],
+    skills: [
+      { label: "Node.js", icon: SiNodedotjs, color: "#5fa04e" },
+      { label: "Express", icon: SiExpress, color: "#a8b3cf" },
+      { label: "REST APIs", icon: Network, color: "#22d3ee" },
+      { label: "Authentication", icon: KeyRound, color: "#f59e0b" },
+      { label: "Validation", icon: ShieldCheck, color: "#34d399" },
+    ],
   },
   {
     title: "Data & tools",
     icon: Database,
-    skills: ["MongoDB", "Mongoose", "Git", "GitHub", "Postman"],
+    skills: [
+      { label: "MongoDB", icon: SiMongodb, color: "#47a248" },
+      { label: "Mongoose", icon: SiMongoose, color: "#880000" },
+      { label: "Git", icon: SiGit, color: "#f05032" },
+      { label: "GitHub", icon: SiGithub, color: "#a8b3cf" },
+      { label: "Postman", icon: SiPostman, color: "#ff6c37" },
+    ],
   },
   {
     title: "Foundations",
     icon: Braces,
-    skills: ["C++", "DSA", "OOP", "Problem Solving", "Clean Code"],
+    skills: [
+      { label: "C++", icon: SiCplusplus, color: "#659ad2" },
+      { label: "DSA", icon: Binary, color: "#c084fc" },
+      { label: "OOP", icon: Puzzle, color: "#60a5fa" },
+      { label: "Problem Solving", icon: Bug, color: "#fb7185" },
+      { label: "Clean Code", icon: Sparkles, color: "#facc15" },
+    ],
   },
 ];
 

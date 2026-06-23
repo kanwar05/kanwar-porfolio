@@ -12,7 +12,7 @@ export default function Skills() {
           A practical full-stack toolkit, grounded in strong fundamentals and
           shaped around shipping reliable web experiences.
         </p>
-        <div className="mt-9 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {skillGroups.map(({ title, icon: Icon, skills }, groupIndex) => (
             <motion.article
               key={title}
@@ -21,24 +21,38 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ delay: groupIndex * 0.09 }}
               whileHover={{ y: -4 }}
-              className="glass group rounded-2xl p-4 transition-colors hover:border-violet-400/25"
+              className="glass group relative overflow-hidden rounded-2xl p-5 transition-colors hover:border-violet-400/30"
             >
+              <span className="absolute -right-10 -top-10 size-28 rounded-full bg-violet-500/8 blur-2xl transition group-hover:bg-violet-500/15" />
               <span className="grid size-9 place-items-center rounded-lg bg-gradient-to-br from-violet-500/20 to-cyan-400/10 text-violet-400">
                 <Icon size={18} />
               </span>
               <h3 className="mt-4 font-display text-base font-bold">{title}</h3>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {skills.map(({ label, icon: SkillIcon, color }, index) => (
+                  <motion.div
+                    key={label}
                     initial={{ opacity: 0, scale: 0.85 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: groupIndex * 0.08 + index * 0.04 }}
-                    className="theme-border text-muted rounded-lg border bg-[var(--surface)] px-2.5 py-1.5 text-xs"
+                    whileHover={{ y: -2 }}
+                    className="theme-border flex min-h-20 flex-col items-center justify-center gap-2 rounded-xl border bg-[var(--surface)] px-2 py-3 text-center transition-colors hover:bg-[var(--surface-strong)]"
                   >
-                    {skill}
-                  </motion.span>
+                    <span
+                      className="grid size-8 place-items-center rounded-lg"
+                      style={{
+                        color,
+                        backgroundColor: `color-mix(in srgb, ${color} 14%, transparent)`,
+                      }}
+                      aria-hidden="true"
+                    >
+                      <SkillIcon size={18} />
+                    </span>
+                    <span className="text-muted text-[11px] font-semibold leading-tight">
+                      {label}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
             </motion.article>
