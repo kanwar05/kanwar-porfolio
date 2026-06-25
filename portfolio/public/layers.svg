@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F39C12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers-icon lucide-layers"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Kanwar Sain logo">
+  <defs>
+    <linearGradient id="mark" x1="12" y1="10" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFF"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="16" y1="18" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D8F7FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#080B13"/>
+  <path d="M17 16h30a5 5 0 0 1 5 5v22a5 5 0 0 1-5 5H17a5 5 0 0 1-5-5V21a5 5 0 0 1 5-5Z" fill="url(#mark)" opacity=".18"/>
+  <path d="M20 19h24a5 5 0 0 1 5 5v21H21a6 6 0 0 1-6-6V24a5 5 0 0 1 5-5Z" stroke="url(#mark)" stroke-width="3" fill="none"/>
+  <path d="M25 23v18m0-9 9-9m-9 9 9 9" stroke="url(#shine)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M39 24h4c2.8 0 5 2 5 4.8 0 2.5-1.8 4.1-4.6 4.7l-2.3.5c-2.1.5-3.1 1.4-3.1 3 0 2 1.7 3.2 4.4 3.2H48" stroke="url(#shine)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
